@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>สถานที่ท่องเที่ยวทั่วไทย</title>
 
     {# Load the tag library #}
     {% load bootstrap4 %}
@@ -16,11 +16,31 @@
     {# Display django.contrib.messages as Bootstrap alerts #}
     {% bootstrap_messages %}
 
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/5.0/examples/blog/blog.css" rel="stylesheet">
+
 </head>
 <body>
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">Blog ผลงานและงานวิจัย</a>
+        <a class="navbar-brand" href="#">Blog สถานที่ท่องเที่ยวทั่วไทย</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -32,25 +52,25 @@
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <input class="form-control mr-sm-2" type="text" placeholder="ค้นหา" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">ค้นหา</button>
           </form>
         </div>
       </nav>
 
       
-<main role="main">
+<main class="container">
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1 class="display-3">Blog ผลงานและงานวิจัย</h1>
+        <h1 class="display-3">Blog สถานที่ท่องเที่ยวทั่วไทย</h1>
       </div>
     </div>
   
     <div class="container">
-      <!-- Example row of columns -->
 
+      <!--
         {% for post in test %}
         <div class="row pb-3">
             <div class="card">
@@ -58,13 +78,46 @@
                     งานวิจัย
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">{{ post.title }}</h5>
-                    <p class="card-text">{{ post.body }}</p>
+                      <h5 class="card-title">{{ post.title }}</h5>
+                      <p class="card-text">{{ post.body }}</p>
+                      <a href="#" class="stretched-link">Continue reading</a>
                 </div>
             </div>
         </div>
         {% endfor %}
+      -->
  
+
+      {% for post in test %}
+
+        {% if forloop.first %}
+          <div class="row mb-2">
+        {% elif forloop.counter0|divisibleby:2 %}
+          </div>
+          <div class="row mb-2">
+        {% endif %}
+
+        <div class="col-md-6">
+          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+              <strong class="d-inline-block mb-2 text-primary">{{ post.province }}</strong>
+              <h4 class="mb-0">{{ post.title }}</h4>
+              <div class="mb-1 text-muted">{{ post.publishDate }}</div>
+              <p class="card-text mb-auto">{{ post.body }}</p>
+              <a href="#" class="stretched-link">Continue reading</a>
+            </div>
+            <div class="col-auto d-none d-lg-block">
+              <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            </div>
+          </div>
+        </div>
+
+        {% if forloop.last %}
+          </div>
+        {% endif %}
+
+      {% endfor %}
+
     </div> <!-- /container -->
 
   </main>
